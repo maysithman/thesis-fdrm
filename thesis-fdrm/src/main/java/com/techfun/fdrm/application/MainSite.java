@@ -38,13 +38,11 @@ public class MainSite {
 	}
 
 	private static void testSelectSite(SiteService siteService) {
-		// TODO Auto-generated method stub
 		
 	}
 
 
 	private static void testDeleteSite(SiteService siteService) {
-		// TODO Auto-generated method stub
 		
 	}
 
