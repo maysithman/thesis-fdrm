@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.techfun.fdrm.model.Site;
 import com.techfun.fdrm.service.SiteService;
 
-public class MainSite {
+public class AppSite {
 
 	public static void main(String[] args) {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
