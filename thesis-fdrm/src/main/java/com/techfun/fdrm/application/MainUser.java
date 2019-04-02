@@ -1,5 +1,7 @@
 package com.techfun.fdrm.application;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,10 +14,46 @@ public class MainUser {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 		UserService userService = appContext.getBean("userService", UserService.class);
 		
-		testCreateUser(userService);
+		//testCreateUser(userService);
 		//testUpdateUser(userService);
-		//testSelectUser(userService);
+		//testSelectAllUsers(userService);
 		//testDeleteUser(userService);
+		//testSelectExactUser(userService);
+		testNumOfUser(userService);
+	}
+
+	private static void testNumOfUser(UserService userService) {
+		User user = new User();
+		System.out.println("The total number of users : " + userService.numOfUser(user));
+	}
+
+	private static void testSelectExactUser(UserService userService) {
+		User user = new User();
+		user.setId(3);
+		
+		User u = userService.selectExactUser(user);
+		
+		System.out.println(
+				"Id : " + u.getId() + "\t" + 
+				"Name : " + u.getName() + "\t" +
+				"Password : " + u.getPassword() + "\t" +
+				"Site id : " + u.getSiteId()
+				);
+	}
+
+	private static void testSelectAllUsers(UserService userService) {
+		User user = new User();
+		
+		List<User> users = userService.selectAllUsers(user);
+		
+		for(User u : users) {
+			System.out.println(
+					"Id : " + u.getId() + "\t" +
+					"Name : " + u.getName() + "\t" +
+					"Passowrd : " + u.getPassword() + "\t" +
+					"Site Id : " + u.getSiteId()
+					);
+		}
 	}
 
 	private static void testCreateUser(UserService userService) {
@@ -37,10 +75,6 @@ public class MainUser {
 		userService.updateUser(user);
 		
 		System.out.println("Updated User Successfully.");
-	}
-
-	private static void testSelectUser(UserService userService) {
-		
 	}
 
 	private static void testDeleteUser(UserService userService) {

@@ -1,5 +1,7 @@
 package com.techfun.fdrm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +25,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void selectUser(User user) {
-		userRepository.selectUser(user);
+	public void deleteUser(User user) {
+		userRepository.deleteUser(user);
 	}
 
 	@Override
-	public void deleteUser(User user) {
-		userRepository.deleteUser(user);
+	public List<User> selectAllUsers(User user) {
+		return userRepository.selectAllUsers(user);
+	}
+
+	@Override
+	public User selectExactUser(User user) {
+		return userRepository.selectExactUser(user);
+	}
+
+	@Override
+	public int numOfUser(User user) {
+		return userRepository.numOfUser(user);
 	}
 
 }
