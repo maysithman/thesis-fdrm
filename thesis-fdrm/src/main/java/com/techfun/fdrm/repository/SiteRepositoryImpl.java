@@ -1,10 +1,13 @@
 package com.techfun.fdrm.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.techfun.fdrm.model.Site;
+import com.techfun.fdrm.repository.util.SiteRowMapper;
 
 @Repository("siteRepository")
 public class SiteRepositoryImpl implements SiteRepository {
@@ -24,15 +27,35 @@ public class SiteRepositoryImpl implements SiteRepository {
 		jdbcTemplate.update(updateTableSQL, site.getName(), site.getId());
 	}
 
-	@Override
+	/*@Override
 	public void selectSite(Site site) {
 		String updateTableSQL = "SELECT * FROM Site";
-	}
+	}*/
 
 	@Override
 	public void deleteSite(Site site) {
 		String deleteTableSQL = "DELETE FROM Site WHERE id = ?";
 		jdbcTemplate.update(deleteTableSQL, site.getId());
+	}
+
+	@Override
+	public List<Site> selectAllSites(Site site) {
+		String selectSitesSQL = "SELECT * FROM Site";
+		List<Site> sites = jdbcTemplate.query(selectSitesSQL, new SiteRowMapper());
+		return sites;
+	}
+
+	@Override
+	public int numOfSite(Site site) {
+		String countSiteSQL = "SELECT COUNT(*) FROM Site";
+		return jdbcTemplate.queryForObject(countSiteSQL, Integer.class);
+	}
+
+	@Override
+	public Site selectExactSite(Site site) {
+		String selectSiteIdSQL = "SELECT * FROM Site WHERE id=?";
+		Site s = jdbcTemplate.queryForObject(selectSiteIdSQL, new SiteRowMapper(), site.getId());
+		return s;
 	}
 
 }

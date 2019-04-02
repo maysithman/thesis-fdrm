@@ -1,5 +1,7 @@
 package com.techfun.fdrm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +25,23 @@ public class SiteServiceImpl implements SiteService {
 	}
 
 	@Override
-	public void selectSite(Site site) {
-		siteRepository.selectSite(site);
+	public void deleteSite(Site site) {
+		siteRepository.deleteSite(site);
 	}
 
 	@Override
-	public void deleteSite(Site site) {
-		siteRepository.deleteSite(site);
+	public List<Site> selectAllSites(Site site) {
+		return siteRepository.selectAllSites(site);
+	}
+
+	@Override
+	public int numOfSite(Site site) {
+		return siteRepository.numOfSite(site);
+	}
+
+	@Override
+	public Site selectExactSite(Site site) {
+		return siteRepository.selectExactSite(site);
 	}
 
 }
