@@ -1,5 +1,7 @@
 package com.techfun.fdrm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +25,23 @@ public class DocumentServiceImpl implements DocumentService {
 	}
 
 	@Override
-	public void selectDocument(Document document) {
-		documentRepository.selectDocument(document);
+	public void deleteDocument(Document document) {
+		documentRepository.deleteDocument(document);
 	}
 
 	@Override
-	public void deleteDocument(Document document) {
-		documentRepository.deleteDocument(document);
+	public List<Document> selectAllDocuments(Document document) {
+		return documentRepository.selectAllDocuments(document);
+	}
+
+	@Override
+	public Document selectExactDocument(Document document) {
+		return documentRepository.selectExactDocument(document);
+	}
+
+	@Override
+	public int numOfDocument(Document document) {
+		return documentRepository.numOfDoument(document);
 	}
 
 }

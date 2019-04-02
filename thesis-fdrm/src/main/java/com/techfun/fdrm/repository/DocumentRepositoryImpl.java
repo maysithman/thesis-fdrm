@@ -1,10 +1,13 @@
 package com.techfun.fdrm.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.techfun.fdrm.model.Document;
+import com.techfun.fdrm.repository.util.DocumentRowMapper;
 
 @Repository("documentRepository")
 public class DocumentRepositoryImpl implements DocumentRepository {
@@ -25,15 +28,27 @@ public class DocumentRepositoryImpl implements DocumentRepository {
 	}
 
 	@Override
-	public void selectDocument(Document document) {
-		String selectDocument = "SELECT * FROM Document WHERE id=?";
-		jdbcTemplate.update(selectDocument, document.getId());
-	}
-
-	@Override
 	public void deleteDocument(Document document) {
 		String deleteDocument = "DELETE FROM Document WHERE id=?";
 		jdbcTemplate.update(deleteDocument, document.getId());
+	}
+
+	@Override
+	public List<Document> selectAllDocuments(Document document) {
+		String selectDocSQL = "SELECT * FROM Document";
+		return jdbcTemplate.query(selectDocSQL, new DocumentRowMapper());
+	}
+
+	@Override
+	public Document selectExactDocument(Document document) {
+		String selectDocIdSQL = "SELECT * FROM Document WHERE id=?";
+		return jdbcTemplate.queryForObject(selectDocIdSQL, new DocumentRowMapper(), document.getId());
+	}
+
+	@Override
+	public int numOfDoument(Document document) {
+		String countDocumentSQL = "SELECT COUNT(*) FROM Document";
+		return jdbcTemplate.queryForObject(countDocumentSQL, Integer.class);
 	}
 
 }
