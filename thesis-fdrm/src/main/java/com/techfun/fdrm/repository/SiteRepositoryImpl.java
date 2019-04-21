@@ -27,11 +27,6 @@ public class SiteRepositoryImpl implements SiteRepository {
 		jdbcTemplate.update(updateTableSQL, site.getName(), site.getId());
 	}
 
-	/*@Override
-	public void selectSite(Site site) {
-		String updateTableSQL = "SELECT * FROM Site";
-	}*/
-
 	@Override
 	public void deleteSite(Site site) {
 		String deleteTableSQL = "DELETE FROM Site WHERE id = ?";
