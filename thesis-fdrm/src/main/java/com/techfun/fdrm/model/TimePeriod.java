@@ -1,8 +1,5 @@
 package com.techfun.fdrm.model;
 
-import java.sql.Time;
-import java.time.LocalTime;
-
 public class TimePeriod {
 	
 	private Integer id;
